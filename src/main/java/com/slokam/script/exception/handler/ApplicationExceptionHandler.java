@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.slokam.script.exception.ApplicationException;
+import com.slokam.script.exception.DataNotFoundException;
 import com.slokam.script.exception.UserInputException;
 
 @RestControllerAdvice
@@ -21,7 +22,7 @@ public class ApplicationExceptionHandler {
 	public ResponseEntity<String> handleApplicationException(ApplicationException exception){
 		
 		
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
 	}
 	
 	@ExceptionHandler(Exception.class)
@@ -29,6 +30,10 @@ public class ApplicationExceptionHandler {
 		
 		
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+	}
+	@ExceptionHandler(DataNotFoundException.class)
+	public ResponseEntity<String> handleDataNotFoundException(DataNotFoundException exception) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
 	}
 	
 }

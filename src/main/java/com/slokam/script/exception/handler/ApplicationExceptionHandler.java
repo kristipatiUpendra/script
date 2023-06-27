@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.slokam.script.dto.ErrorResponse;
 import com.slokam.script.exception.ApplicationException;
 import com.slokam.script.exception.UserInputException;
 
@@ -13,22 +14,29 @@ public class ApplicationExceptionHandler {
 
 	
 	@ExceptionHandler(UserInputException.class)
-	public ResponseEntity<String> handleUserInputException(UserInputException exception){
-		
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+	public ResponseEntity<ErrorResponse> handleUserInputException(UserInputException exception){
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setErrorResponseCode(HttpStatus.BAD_REQUEST.value());
+		errorResponse.setMessage(exception.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
+	
 	@ExceptionHandler(ApplicationException.class)
-	public ResponseEntity<String> handleApplicationException(ApplicationException exception){
+	public ResponseEntity<ErrorResponse> handleApplicationException(ApplicationException exception){
 		
-		
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setErrorResponseCode(HttpStatus.BAD_REQUEST.value());
+		errorResponse.setMessage(exception.getMessage());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
 	
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<String> handleException(ApplicationException exception){
+	public ResponseEntity<ErrorResponse> handleException(ApplicationException exception){
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setErrorResponseCode(HttpStatus.BAD_REQUEST.value());
+		errorResponse.setMessage(exception.getMessage());
 		
-		
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
 	
 }

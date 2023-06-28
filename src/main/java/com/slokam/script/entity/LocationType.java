@@ -15,4 +15,5 @@ public class LocationType {
 	  private Integer id;
 	  private String  description;
 	
+	
 }

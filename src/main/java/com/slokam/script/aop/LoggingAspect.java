@@ -1,4 +1,5 @@
 
+
 package com.slokam.script.aop;
 
 import org.aspectj.lang.JoinPoint;
@@ -32,4 +33,5 @@ public class LoggingAspect {
 		
 
 	}
+
 }

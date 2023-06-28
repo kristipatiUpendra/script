@@ -1,11 +1,20 @@
 package com.slokam.script.service;
 
+
+import java.util.List;
+
 import com.slokam.script.dto.ScriptDTO;
-import com.slokam.script.exception.ApplicationException;
+import com.slokam.script.exception.UserInputException;
 
 public interface IScriptService {
 
-	public ScriptDTO saveScript(ScriptDTO scriptDto) throws ApplicationException ,Exception;
-	public ScriptDTO deleteScript(Long scriptId);
-	public ScriptDTO getScriptById(Long scriptId);
+	public ScriptDTO savescript(ScriptDTO scriptdTO) throws UserInputException, Exception;
+	
+	public ScriptDTO getbyId(Long id);
+	
+	public List<ScriptDTO> getall();
+	
+	public ScriptDTO deletebyId();
+
+
 }

@@ -7,5 +7,5 @@ public class ScriptDTO {
 
 	private Long id;
 	private String name;
-	
+
 }

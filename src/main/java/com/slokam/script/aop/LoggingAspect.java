@@ -1,3 +1,4 @@
+
 package com.slokam.script.aop;
 
 import org.aspectj.lang.JoinPoint;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
+
    private static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 	
 	@Before("execution (*  com.slokam.script.*.*.* (..))")
@@ -28,5 +30,6 @@ public class LoggingAspect {
 		
 		LOGGER.trace("Exit from the method "+methodName+ "in the "+ className );
 		
+
 	}
 }

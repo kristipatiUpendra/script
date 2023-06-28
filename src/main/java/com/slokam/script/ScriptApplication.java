@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+
 @SpringBootApplication
 @EnableAspectJAutoProxy
 public class ScriptApplication {
@@ -14,9 +15,12 @@ public class ScriptApplication {
 		SpringApplication.run(ScriptApplication.class, args);
 	}
 
+
+
 	@Bean
-	public ModelMapper modelMapper() {
+	public ModelMapper modelmapper()
+	{
 		return new ModelMapper();
 	}
-	
+
 }

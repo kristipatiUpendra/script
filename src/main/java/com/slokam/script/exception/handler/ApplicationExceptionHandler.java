@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+
 import com.slokam.script.dto.ErrorResponse;
+
 import com.slokam.script.exception.ApplicationException;
 import com.slokam.script.exception.UserInputException;
 
@@ -38,5 +40,5 @@ public class ApplicationExceptionHandler {
 		
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
-	
+
 }

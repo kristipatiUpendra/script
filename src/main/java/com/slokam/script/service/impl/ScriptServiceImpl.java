@@ -1,5 +1,11 @@
 package com.slokam.script.service.impl;
 
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,46 +20,65 @@ import com.slokam.script.exception.UserInputException;
 import com.slokam.script.service.IScriptService;
 
 @Service
-public class ScriptServiceImpl implements IScriptService{
 
-	private static final Logger LOGGER  = LoggerFactory.getLogger(ScriptServiceImpl.class);
+public class ScriptServiceImpl implements IScriptService {
+
 	@Autowired
-	private IScriptDAO scriptDao;
-	
+	private IScriptDAO scriptdao;
+
 	@Autowired
-	private ModelMapper modelMapper;
-	
+	private ModelMapper modelmapper;
+
 	@Override
-	public ScriptDTO saveScript(ScriptDTO scriptDto) throws ApplicationException, Exception{
-		if(scriptDto ==null)
-			throw new UserInputException("There is not data in scriptDto."); 
+	public ScriptDTO savescript(ScriptDTO scriptdTO) throws  Exception {
+
+		if(scriptdTO == null || scriptdTO.getName() == null || scriptdTO.getName().trim().length()==0 )
+			
+			throw new UserInputException("There is no data found in scriptdto");
+
+	
+		Script script = modelmapper.map(scriptdTO, Script.class);
 		
+		if(script == null )
+			throw new ApplicationException("There is no data found in script");
 		
-		LOGGER.debug("Input Script DTO Data :"+scriptDto.toString());
-		  
-		Script script = modelMapper.map(scriptDto, Script.class);
-		if(script == null) {
-			throw new ApplicationException("Model Mapper Conversion Problem.");
+		scriptdao.save(script);
+		
+		scriptdTO.setId(script.getId());
+		return scriptdTO;
+	}
+
+	@Override
+	public ScriptDTO getbyId(Long id) {
+		
+	Optional<Script> scriptopt =	scriptdao.findById(id);
+	ScriptDTO scriptdto = null;
+	if(scriptopt.isPresent())
+	{
+		Script script = scriptopt.get();
+		scriptdto =	modelmapper.map(script, ScriptDTO.class);
+		
+	}
+		return scriptdto;
+	}
+
+	@Override
+	public List<ScriptDTO> getall() {
+		
+		List<Script> listScript = scriptdao.findAll();
+		List<ScriptDTO> listScriptDto = new ArrayList<>();
+		
+		for(Script script : listScript)
+		{
+		 ScriptDTO scriptdto =	modelmapper.map(script, ScriptDTO.class);
+		 listScriptDto.add(scriptdto);
+			
 		}
-		
-		LOGGER.debug("conveted tp script entity Data :"+script.toString());
-		
-		scriptDao.save(script);
-		
-		LOGGER.debug("After save:"+script.toString());
-		scriptDto.setId(script.getId());
-		return scriptDto;
+		return listScriptDto;
 	}
 
 	@Override
-	public ScriptDTO deleteScript(Long scriptId) {
-		LOGGER.debug(null);
-		
-		return null;
-	}
-
-	@Override
-	public ScriptDTO getScriptById(Long scriptId) {
+	public ScriptDTO deletebyId() {
 		// TODO Auto-generated method stub
 		return null;
 	}

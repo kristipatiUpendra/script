@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 public class Action {
-
+//rdrdtfjyggu
 	@Id
 	@GeneratedValue
 	private Long id;

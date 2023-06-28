@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.slokam.script.dto.ErrorResponse;
 
 import com.slokam.script.exception.ApplicationException;
+import com.slokam.script.exception.DataNotFoundException;
 import com.slokam.script.exception.UserInputException;
 
 @RestControllerAdvice
@@ -29,16 +30,25 @@ public class ApplicationExceptionHandler {
 		ErrorResponse errorResponse = new ErrorResponse();
 		errorResponse.setErrorResponseCode(HttpStatus.BAD_REQUEST.value());
 		errorResponse.setMessage(exception.getMessage());
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleException(ApplicationException exception){
 		ErrorResponse errorResponse = new ErrorResponse();
-		errorResponse.setErrorResponseCode(HttpStatus.BAD_REQUEST.value());
+		errorResponse.setErrorResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		errorResponse.setMessage(exception.getMessage());
 		
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
+	@ExceptionHandler(DataNotFoundException.class)
+	public ResponseEntity<ErrorResponse> handleDataNotFoundException(DataNotFoundException exception){
+		
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setErrorResponseCode(HttpStatus.NOT_FOUND.value());
+		errorResponse.setMessage(exception.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+	}
+	
 
 }

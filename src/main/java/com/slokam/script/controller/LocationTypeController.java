@@ -1,18 +1,23 @@
 package com.slokam.script.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.slokam.script.dto.LocationTypeDto;
+import com.slokam.script.dto.ScriptDTO;
 import com.slokam.script.service.IlocationService;
 
 @RestController
-@RequestMapping("script")
+@RequestMapping("locationtype")
 public class LocationTypeController {
 	
 	@Autowired
@@ -28,5 +33,28 @@ public class LocationTypeController {
 	}
 	
 	
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<LocationTypeDto> findbylocationid(@PathVariable Integer id)
+	{
+		             LocationTypeDto loc =  ilocservice.getbyid(id);
+		       
+		       return ResponseEntity.status(HttpStatus.OK).body(loc);
+	}
+	
+	@GetMapping("deletebyid/{id}")
+	public ResponseEntity<LocationTypeDto> deletebyid(@PathVariable Integer id)
+	{
+		             LocationTypeDto locdtp = ilocservice.deletebyid(id);
+		    return ResponseEntity.status(HttpStatus.OK).body(locdtp);
+	}
+	
+	@GetMapping("getalllocation")
+	public ResponseEntity<List<LocationTypeDto>> getalllocationtype()
+	{
+		              List<LocationTypeDto> locationdto = ilocservice.getbyall();
+		      return ResponseEntity.status(HttpStatus.OK).body(locationdto);
+		
+	}
 
 }

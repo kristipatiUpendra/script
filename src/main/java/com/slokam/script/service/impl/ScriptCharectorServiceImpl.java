@@ -52,7 +52,7 @@ public class ScriptCharectorServiceImpl implements IScriptCharectorService {
 			throws ApplicationException, DataNotFoundException, Exception {
 
 		Optional<ScriptCharector> opt = scriptCharectorDAO.findById(charectorId);
-		if (opt.isEmpty()) {
+		if (!opt.isPresent()) {
 			throw new DataNotFoundException("Script charector id not found while reading data.");
 		}
 

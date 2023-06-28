@@ -1,5 +1,6 @@
 package com.slokam.script.service;
 
+
 import java.util.List;
 
 import com.slokam.script.dto.ScriptDTO;
@@ -14,5 +15,6 @@ public interface IScriptService {
 	public List<ScriptDTO> getall();
 	
 	public ScriptDTO deletebyId();
+
 
 }

@@ -16,9 +16,11 @@ public class ScriptApplication {
 	}
 
 
+
 	@Bean
 	public ModelMapper modelmapper()
 	{
 		return new ModelMapper();
 	}
+
 }

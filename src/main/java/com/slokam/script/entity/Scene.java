@@ -18,6 +18,7 @@ public class Scene {
 	@ManyToOne
 	@JoinColumn(name="locId")
 	private Location location;
+	
 	@ManyToOne
 	@JoinColumn(name="timeId")
 	private Time time;

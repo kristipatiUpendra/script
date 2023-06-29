@@ -22,7 +22,7 @@ public class Action {
 	private Scene scene;
 	@OneToOne
 	@JoinColumn(name="sceSeqId")
-	private SceneOrder sceneOrder;
+	private SceneElementOrder sceneElementOrder;
 	
 	
 }

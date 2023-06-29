@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class SceneOrder {
+public class SceneElementOrder {
 
 	@Id
 	@GeneratedValue

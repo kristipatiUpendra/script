@@ -15,7 +15,7 @@ public class Dialogue {
 
 	@Id
 	@GeneratedValue
-	private Long dialogue;
+	private Long id;
 	private String content;
 	@ManyToOne
 	@JoinColumn(name="scchId")
@@ -26,7 +26,10 @@ public class Dialogue {
 	private String parantical;
 	@OneToOne
 	@JoinColumn(name="sceSeqId") 
-	private SceneOrder sceneOrder;
+	private SceneElementOrder sceneOrder;
+	
+	
+	
 	
 	
 	

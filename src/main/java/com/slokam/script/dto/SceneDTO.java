@@ -12,7 +12,9 @@ public class SceneDTO {
 	private Integer timeId;
 	private Long scriptId;
 	private List<ActionDTO> actionList;
-
+    private List<DialogueDTO> dialogueList;
+    
+    
     
 
 }

@@ -15,6 +15,7 @@ public class ScriptApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ScriptApplication.class, args);
+		System.out.println("Hello This is for teting ...");
 	}
 
 
